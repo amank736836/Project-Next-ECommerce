@@ -1,80 +1,132 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { signOut } from "firebase/auth";
 import toast from "react-hot-toast";
-import { FaHome, FaSearch, FaSignInAlt, FaSignOutAlt, FaInfoCircle, FaBoxOpen, FaFileAlt, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaBars,
+  FaBoxOpen,
+  FaFileAlt,
+  FaHome,
+  FaInfoCircle,
+  FaSearch,
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaTimes,
+} from "react-icons/fa";
 import { RiDatabaseFill, RiShoppingCart2Fill } from "react-icons/ri";
 import { useSelector } from "react-redux";
-import Link from "next/link";
 import { auth } from "../firebase";
 import { RootState } from "../redux/store";
-import { useRouter } from "next/navigation";
 
 const Header = () => {
-    const { user } = useSelector((state: RootState) => state.userReducer);
-    const router = useRouter();
-    const [isOpen, setIsOpen] = useState(false);
+  const { user } = useSelector((state: RootState) => state.userReducer);
+  const { cartItems } = useSelector((state: RootState) => state.cartReducer);
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
-    const logoutHandler = async () => {
-        try {
-            await signOut(auth);
-            toast.success("Signed Out Successfully");
-            setIsOpen(false);
-            router.push("/login");
-        } catch (error) {
-            toast.error("Sign Out Failed");
-        }
-    };
+  const logoutHandler = async () => {
+    if (!auth) {
+      toast.error("Sign-in is not configured in this environment");
+      return;
+    }
 
-    const closeMenu = () => setIsOpen(false);
+    try {
+      await signOut(auth);
+      toast.success("Signed out successfully");
+      setIsOpen(false);
+      router.push("/login");
+    } catch {
+      toast.error("Sign out failed");
+    }
+  };
 
-    return (
-        <nav className="header">
-            <Link href="/" className="logo">
-                <img src="/icon.svg" alt="Log" />
-                VirtuoStore
-            </Link>
-            {/* Desktop Navigation */}
-            <div className="desktop-nav">
-                <Link href="/" title="Home"><FaHome /> <span>Home</span></Link>
-                <Link href="/search" title="Search"><FaSearch /> <span>Search</span></Link>
-                <Link href="/about" title="About"><FaInfoCircle /> <span>About</span></Link>
-                <Link href="/cart" title="Cart"><RiShoppingCart2Fill /> <span>Cart</span></Link>
-                <Link href="/orders" title="Orders"><FaBoxOpen /> <span>Orders</span></Link>
-                <Link href="/policies" title="Policies"><FaFileAlt /> <span>Policies</span></Link>
-                {user?.role === "admin" && (
-                    <Link href="/admin/dashboard" title="Admin Dashboard"><RiDatabaseFill /> <span>Admin</span></Link>
-                )}
-                {user ? (
-                    <button onClick={logoutHandler} title="Sign Out"><FaSignOutAlt /> <span>Sign Out</span></button>
-                ) : (
-                    <Link href="/login" title="Login"><FaSignInAlt /> <span>Login</span></Link>
-                )}
-            </div>
+  const closeMenu = () => setIsOpen(false);
 
-            {/* Mobile Menu Button */}
-            <button className="mobile-toggle" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <FaTimes /> : <FaBars />}
-            </button>
+  return (
+    <header className="header">
+      <Link href="/" className="logo" onClick={closeMenu} aria-label="VirtuoStore home">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/icon.svg" alt="" />
+        <span className="logo-wordmark">Virtuo<span>Store</span></span>
+      </Link>
 
-            {/* Mobile Navigation Drawer */}
-            <div className={`mobile-nav ${isOpen ? "open" : ""}`}>
-                <Link href="/" onClick={closeMenu}><FaHome /> Home</Link>
-                <Link href="/search" onClick={closeMenu}><FaSearch /> Search</Link>
-                <Link href="/about" onClick={closeMenu}><FaInfoCircle /> About</Link>
-                <Link href="/cart" onClick={closeMenu}><RiShoppingCart2Fill /> Cart</Link>
-                <Link href="/orders" onClick={closeMenu}><FaBoxOpen /> Orders</Link>
-                <Link href="/policies" onClick={closeMenu}><FaFileAlt /> Policies</Link>
-                {user?.role === "admin" && (
-                    <Link href="/admin/dashboard" onClick={closeMenu}><RiDatabaseFill /> Admin Dashboard</Link>
-                )}
-                {user ? (
-                    <button onClick={logoutHandler}><FaSignOutAlt /> Sign Out</button>
-                ) : (
-                    <Link href="/login" onClick={closeMenu}><FaSignInAlt /> Login</Link>
-                )}
-            </div>
-        </nav>
-    );
+      <nav className="desktop-nav" aria-label="Primary navigation">
+        <Link href="/" title="Home" aria-current={pathname === "/" ? "page" : undefined}>
+          <FaHome aria-hidden="true" /><span className="nav-label">Home</span>
+        </Link>
+        <Link href="/search" title="Search" aria-current={pathname === "/search" ? "page" : undefined}>
+          <FaSearch aria-hidden="true" /><span className="nav-label">Search</span>
+        </Link>
+        <Link href="/about" title="About" aria-current={pathname === "/about" ? "page" : undefined}>
+          <FaInfoCircle aria-hidden="true" /><span className="nav-label">About</span>
+        </Link>
+        <Link href="/cart" title="Cart" className="nav-cart" aria-current={pathname === "/cart" ? "page" : undefined}>
+          <RiShoppingCart2Fill aria-hidden="true" />
+          <span className="nav-label">Cart</span>
+          {cartCount > 0 && <b className="cart-count">{cartCount}</b>}
+        </Link>
+        <Link href="/orders" title="Orders" aria-current={pathname === "/orders" ? "page" : undefined}>
+          <FaBoxOpen aria-hidden="true" /><span className="nav-label">Orders</span>
+        </Link>
+        <Link href="/policies" title="Policies" aria-current={pathname === "/policies" ? "page" : undefined}>
+          <FaFileAlt aria-hidden="true" /><span className="nav-label">Policies</span>
+        </Link>
+        {user?.role === "admin" && (
+          <Link href="/admin/dashboard" title="Admin" className="admin-link" aria-current={pathname.startsWith("/admin") ? "page" : undefined}>
+            <RiDatabaseFill aria-hidden="true" /><span className="nav-label">Admin</span>
+          </Link>
+        )}
+        {user ? (
+          <button className="nav-auth" type="button" onClick={logoutHandler} title="Sign out">
+            <FaSignOutAlt aria-hidden="true" /><span className="nav-label">Sign out</span>
+          </button>
+        ) : (
+          <Link className="nav-auth" href="/login" title="Login" aria-current={pathname === "/login" ? "page" : undefined}>
+            <FaSignInAlt aria-hidden="true" /><span className="nav-label">Login</span>
+          </Link>
+        )}
+      </nav>
+
+      <button
+        className="mobile-toggle"
+        type="button"
+        onClick={() => setIsOpen((open) => !open)}
+        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={isOpen}
+        aria-controls="mobile-navigation"
+      >
+        {isOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
+      </button>
+
+      <nav
+        className={`mobile-nav${isOpen ? " open" : ""}`}
+        id="mobile-navigation"
+        aria-label="Mobile navigation"
+      >
+        <Link href="/" onClick={closeMenu} aria-current={pathname === "/" ? "page" : undefined}><FaHome aria-hidden="true" />Home</Link>
+        <Link href="/search" onClick={closeMenu} aria-current={pathname === "/search" ? "page" : undefined}><FaSearch aria-hidden="true" />Search</Link>
+        <Link href="/about" onClick={closeMenu} aria-current={pathname === "/about" ? "page" : undefined}><FaInfoCircle aria-hidden="true" />About</Link>
+        <Link href="/cart" onClick={closeMenu} aria-current={pathname === "/cart" ? "page" : undefined}>
+          <RiShoppingCart2Fill aria-hidden="true" />Cart {cartCount > 0 && <b className="mobile-cart-count">{cartCount}</b>}
+        </Link>
+        <Link href="/orders" onClick={closeMenu} aria-current={pathname === "/orders" ? "page" : undefined}><FaBoxOpen aria-hidden="true" />Orders</Link>
+        <Link href="/policies" onClick={closeMenu} aria-current={pathname === "/policies" ? "page" : undefined}><FaFileAlt aria-hidden="true" />Policies</Link>
+        {user?.role === "admin" && (
+          <Link href="/admin/dashboard" onClick={closeMenu} aria-current={pathname.startsWith("/admin") ? "page" : undefined}><RiDatabaseFill aria-hidden="true" />Admin dashboard</Link>
+        )}
+        {user ? (
+          <button type="button" onClick={logoutHandler}><FaSignOutAlt aria-hidden="true" />Sign out</button>
+        ) : (
+          <Link href="/login" onClick={closeMenu} aria-current={pathname === "/login" ? "page" : undefined}><FaSignInAlt aria-hidden="true" />Login</Link>
+        )}
+      </nav>
+    </header>
+  );
 };
 
 export default Header;
