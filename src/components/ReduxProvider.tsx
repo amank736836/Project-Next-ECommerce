@@ -32,12 +32,17 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
+        if (!auth) {
+            dispatch(userNotExist());
+            return;
+        }
+
+        return onAuthStateChanged(auth, async (user) => {
             if (user) {
                 try {
                     const data = await getUser(user.uid);
                     dispatch(userExist(data.user));
-                } catch (error) {
+                } catch {
                     dispatch(userNotExist());
                 }
             } else {

@@ -5,10 +5,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
-import Loader from "@/components/Loaders/Loader";
 import { auth } from "@/firebase";
 import { useLoginMutation } from "@/redux/api/userAPI";
-import { responseToast } from "@/utils/features";
 
 const Login = () => {
     const router = useRouter();
@@ -18,9 +16,12 @@ const Login = () => {
 
     const [login] = useLoginMutation();
 
-    const [loading, setLoading] = useState<boolean>(false);
-
     const loginHandler = async () => {
+        if (!auth) {
+            toast.error("Sign-in is not configured in this environment");
+            return;
+        }
+
         try {
             const provider = new GoogleAuthProvider();
             const { user } = await signInWithPopup(auth, provider);
@@ -35,9 +36,16 @@ const Login = () => {
                 _id: user.uid,
             });
 
-            if ("error" in res) {
-                const error = res.error as any;
-                const message = error.data?.message;
+            if ("error" in res && res.error) {
+                const errorResponse = res.error;
+                const message =
+                    "data" in errorResponse &&
+                    errorResponse.data !== null &&
+                    typeof errorResponse.data === "object" &&
+                    "message" in errorResponse.data &&
+                    typeof errorResponse.data.message === "string"
+                        ? errorResponse.data.message
+                        : undefined;
                 if (message === "Please enter all fields") {
                     toast.error("New Account? Please select Gender and Date of Birth.");
                     return;
@@ -56,9 +64,7 @@ const Login = () => {
         }
     };
 
-    return loading ? (
-        <Loader />
-    ) : (
+    return (
         <div className="login" suppressHydrationWarning>
             <main>
                 <h1 className="heading">Login</h1>
