@@ -1,0 +1,27 @@
+# Functional Requirements
+
+**Source-derived inventory:** 17 requirements. “Implementation note” describes repository behavior; it is not proof of successful runtime behavior. Cases are linked in [traceability](../reports/traceability.md).
+
+| ID | Feature | Source-derived requirement | Implementation note / verification concern |
+|---|---|---|---|
+| REQ-001 | FEAT-001 | The home page presents a latest-products collection and links visitors to the full catalog. | `src/app/page.tsx`; latest API returns at most five records. Data requires MongoDB. |
+| REQ-002 | FEAT-001 | A visitor can search catalog products by name and filter by category and maximum price, select price ordering, and page through results. | `GET /api/product/all`; `PRODUCT_PER_PAGE` defaults to 8. UI expects extra min/max/category response properties not returned by this route; categories are fetched separately. |
+| REQ-003 | FEAT-001 | A product details page displays product images/details/stock/rating and lets the visitor select quantity and add/buy the item. | `src/app/product/[id]/page.tsx`, `ReviewCustomizedButtons.tsx`. Verify stock boundary and missing-photo behavior. |
+| REQ-004 | FEAT-002 | A visitor can initiate Google sign-in; a first-time profile requires name/email/photo plus gender and date of birth. | Firebase client popup then `POST /api/user/new`; API trusts payload identity, see REQ-005 and BUG-007. |
+| REQ-005 | FEAT-002 | The application distinguishes `user` and `admin`; admin pages/actions should be unavailable to non-admins. | UI gate in `src/app/admin/layout.tsx`; server handlers check a caller-supplied ID against the DB role. Identity binding is not implemented/verified in the inspected handlers. |
+| REQ-006 | FEAT-003 | A customer can add products, change item quantity within available stock, remove items, and see cart totals. | Redux is in-memory only. UI stock checks are not a server-side checkout guarantee. |
+| REQ-007 | FEAT-003 | A customer can submit a coupon code and see a discount reflected in cart totals. | Discount API is `GET /api/payment/discount`; cart sends `POST /api/v1/payment/discount`. Current paths/methods disagree (`BUG-001`). |
+| REQ-008 | FEAT-004 | A customer with a non-empty cart supplies shipping address fields and can start Razorpay checkout. | `/shipping` requires form fields. Client calls `/api/payment/create` with a cart payload; handler expects `amount` (`BUG-002`). |
+| REQ-009 | FEAT-004 | The server verifies a Razorpay signature before order/payment confirmation is treated as successful. | `POST /api/payment/verify` computes an HMAC using `RAZORPAY_KEY_SECRET`; payment persistence route expected by client is absent (`BUG-004`). |
+| REQ-010 | FEAT-005 | A successful purchase creates an order with item/pricing/address data, updates stock, and appears in customer order history. | `POST /api/order/new` requires totals omitted by the UI payload and calls `reduceStock` before create (`BUG-003`). `GET /my` trusts query ID. |
+| REQ-011 | FEAT-005 | Customers can view/cancel eligible orders; admins can progress fulfillment and manage transactions. | Order admin update advances Processing → Shipped → Delivered. Cancellation deletes records; the UI/API disagree about whether a Shipped order can be cancelled. |
+| REQ-012 | FEAT-006 | Product pages display reviews; signed-in users can create/update one review for a product and remove their review; product rating aggregates reflect changes. | Model rating range is 1–5. UI POST path differs from backend create route (`BUG-005`); GET response does not supply the `reviewButton` value typed/used by client. |
+| REQ-013 | FEAT-007 | Admins can list, create, update and delete products, including product photo upload/removal. | Routes use Cloudinary and role lookup from query ID; multipart input and media limits need validation. |
+| REQ-014 | FEAT-007 | Admins can list users, update user role, and delete users. | Admin routes check a supplied DB user ID/role but not caller identity. Role values rely on the Mongoose enum. |
+| REQ-015 | FEAT-007 | Admins can list/create/update/delete coupon records; the UI exposes coupon code composition controls. | Model enforces unique code and size 8–25. Create/update handlers currently persist only code and amount, despite extra UI fields. |
+| REQ-016 | FEAT-008 | Admins can view business summaries and bar/line/pie chart data for products, users, orders, revenue and inventory. | Four admin API routes and dashboard pages exist; accuracy, cache freshness and data handling need tests. |
+| REQ-017 | FEAT-009 | Visitors can navigate to home, search, about, cart, orders, policies, and login; informational pages render policy/about copy. | Root `Header.tsx` provides these links; “orders” and “cart” are client routes. Legal/content claims are not server-enforced business rules. |
+
+## Exclusions and uncertainty
+
+The list does not assert unimplemented functions such as customer registration by email/password, shipping tracking, refunds, order email notifications, inventory reservations, or search recommendations. These were not found in the tracked implementation. Product-owner acceptance and expected behavior for known route mismatches are **UNKNOWN / REQUIRES VALIDATION**.

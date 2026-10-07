@@ -1,0 +1,13 @@
+Command: npm ci
+Date: 2026-10-07
+Exit code: 0
+
+Actual command output summary:
+
+added 507 packages, and audited 508 packages in 27s
+
+157 packages are looking for funding
+
+29 vulnerabilities (1 low, 6 moderate, 19 high, 3 critical)
+
+No package manifest or lockfile changes were made by npm ci. npm emitted a notice that a newer major npm version was available; the test baseline used npm 10.9.8.

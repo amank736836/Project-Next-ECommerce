@@ -1,0 +1,356 @@
+
+> next-app@0.1.0 lint
+> eslint
+
+
+/home/user/Project-Next-ECommerce/admin_and_check_inline.ts
+  2:18  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  3:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  4:16  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+/home/user/Project-Next-ECommerce/src/app/about/page.tsx
+  22:201  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  81:89   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  81:166  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/home/user/Project-Next-ECommerce/src/app/admin/coupon/[id]/page.tsx
+   27:30  warning  'isError' is assigned a value but never used                                                                @typescript-eslint/no-unused-vars
+   28:13  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong  @typescript-eslint/no-non-null-asserted-optional-chain
+  105:21  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong  @typescript-eslint/no-non-null-asserted-optional-chain
+  129:17  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong  @typescript-eslint/no-non-null-asserted-optional-chain
+
+/home/user/Project-Next-ECommerce/src/app/admin/coupon/new/page.tsx
+  70:22  error  Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong  @typescript-eslint/no-non-null-asserted-optional-chain
+
+/home/user/Project-Next-ECommerce/src/app/admin/coupons/page.tsx
+  44:52  error    Error: Cannot access variable before it is declared
+
+`deleteHandler` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+/home/user/Project-Next-ECommerce/src/app/admin/coupons/page.tsx:44:52
+  42 |                         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+  43 |                             <Link href={`/admin/coupon/${i._id}`}>Manage</Link>
+> 44 |                             <button onClick={() => deleteHandler(i._id)}>
+     |                                                    ^^^^^^^^^^^^^ `deleteHandler` accessed before it is declared
+  45 |                                 <FaTrash />
+  46 |                             </button>
+  47 |                         </div>
+
+/home/user/Project-Next-ECommerce/src/app/admin/coupons/page.tsx:54:5
+  52 |     }, [data, isError, error]);
+  53 |
+> 54 |     const deleteHandler = async (id: string) => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 55 |         const res = await deleteCoupon({ id: user?._id!, couponId: id });
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 56 |         responseToast(res, null, "");
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 57 |     };
+     | ^^^^^^^ `deleteHandler` is declared here
+  58 |
+  59 |     if (isLoading) return <SkeletonLoader length={20} />;
+  60 |  react-hooks/immutability
+  52:8   warning  React Hook useEffect has a missing dependency: 'deleteHandler'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/exhaustive-deps
+  55:46  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-non-null-asserted-optional-chain
+
+/home/user/Project-Next-ECommerce/src/app/admin/customers/page.tsx
+   3:10  warning  'ReactElement' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  23:66  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-non-null-asserted-optional-chain
+  30:52  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-non-null-asserted-optional-chain
+  35:52  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-non-null-asserted-optional-chain
+  46:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/user/Project-Next-ECommerce/src/app/admin/customers/page.tsx:46:13
+  44 |
+  45 |         if (data) {
+> 46 |             setRows(
+     |             ^^^^^^^ Avoid calling setState() directly within an effect
+  47 |                 data.users.map((i) => ({
+  48 |                     avatar: (
+  49 |                         <img  react-hooks/set-state-in-effect
+  49:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @next/next/no-img-element
+  80:8   warning  React Hook useEffect has missing dependencies: 'changeRoleHandler' and 'deleteHandler'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-hooks/exhaustive-deps
+
+/home/user/Project-Next-ECommerce/src/app/admin/dashboard/page.tsx
+   76:63  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-non-null-asserted-optional-chain
+   83:13  warning  Expected an assignment or function call and instead saw an expression                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-expressions
+   94:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @next/next/no-img-element
+  152:42  error    Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/user/Project-Next-ECommerce/src/app/admin/dashboard/page.tsx:152:42
+  150 |                                             value={value}
+  151 |                                             color={`hsl(
+> 152 |                     ${value * Math.floor(Math.random() * 5 + 4)}
+      |                                          ^^^^^^^^^^^^^ Cannot call impure function
+  153 |                     ,${value}%
+  154 |                     ,50%
+  155 |                     )`}  react-hooks/purity
+
+/home/user/Project-Next-ECommerce/src/app/admin/product/[id]/page.tsx
+    4:8   warning  'toast' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+   23:30  warning  'isError' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   76:17  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-non-null-asserted-optional-chain
+   85:17  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-non-null-asserted-optional-chain
+   95:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/user/Project-Next-ECommerce/src/app/admin/product/[id]/page.tsx:95:13
+  93 |         if (data) {
+  94 |             const p = data.product;
+> 95 |             setProduct({
+     |             ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  96 |                 _id: p._id,
+  97 |                 name: p.name,
+  98 |                 photo: p.photos?.[0]?.url || "",  react-hooks/set-state-in-effect
+  118:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+  186:31  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+
+/home/user/Project-Next-ECommerce/src/app/admin/product/new/page.tsx
+    4:8   warning  'toast' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   61:48  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                               @typescript-eslint/no-non-null-asserted-optional-chain
+  132:35  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/user/Project-Next-ECommerce/src/app/admin/products/page.tsx
+   3:10  warning  'ReactElement' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  23:69  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-non-null-asserted-optional-chain
+  30:17  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-non-null-asserted-optional-chain
+  43:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/user/Project-Next-ECommerce/src/app/admin/products/page.tsx:43:13
+  41 |
+  42 |         if (data) {
+> 43 |             setRows(
+     |             ^^^^^^^ Avoid calling setState() directly within an effect
+  44 |                 data.products.map((i) => ({
+  45 |                     photo: <img src={transformImage(i.photos?.[0]?.url, 40)} alt={i.name} />,
+  46 |                     name: i.name,  react-hooks/set-state-in-effect
+  45:28  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @next/next/no-img-element
+  60:8   warning  React Hook useEffect has a missing dependency: 'deleteHandler'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/exhaustive-deps
+
+/home/user/Project-Next-ECommerce/src/app/admin/transaction/[id]/page.tsx
+  17:17  warning  'OrderItem' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+  61:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/user/Project-Next-ECommerce/src/app/admin/transaction/[id]/page.tsx:61:13
+  59 |         }
+  60 |         if (data) {
+> 61 |             setOrder(data.order);
+     |             ^^^^^^^^ Avoid calling setState() directly within an effect
+  62 |         }
+  63 |     }, [data, isError, error]);
+  64 |  react-hooks/set-state-in-effect
+  68:17  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-non-null-asserted-optional-chain
+  76:17  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-non-null-asserted-optional-chain
+  94:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+
+/home/user/Project-Next-ECommerce/src/app/admin/transaction/page.tsx
+  18:67  error  Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-non-null-asserted-optional-chain
+  29:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/user/Project-Next-ECommerce/src/app/admin/transaction/page.tsx:29:13
+  27 |
+  28 |         if (data) {
+> 29 |             setRows(
+     |             ^^^^^^^ Avoid calling setState() directly within an effect
+  30 |                 data.orders.map((i) => ({
+  31 |                     _id: i._id,
+  32 |                     amount: i.total,  react-hooks/set-state-in-effect
+
+/home/user/Project-Next-ECommerce/src/app/api/order/[id]/route.ts
+  4:10  warning  'Payment' is defined but never used        @typescript-eslint/no-unused-vars
+  5:10  warning  'Product' is defined but never used        @typescript-eslint/no-unused-vars
+  7:27  warning  'OrderItemType' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/user/Project-Next-ECommerce/src/app/api/payment/create/route.ts
+  4:10  warning  'User' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/user/Project-Next-ECommerce/src/app/api/payment/verify/route.ts
+  4:10  warning  'Order' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/user/Project-Next-ECommerce/src/app/api/product/[id]/route.ts
+  105:57  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  167:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/user/Project-Next-ECommerce/src/app/api/product/all/route.ts
+  20:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/user/Project-Next-ECommerce/src/app/api/product/review/new/route.ts
+  29:13  error  'review' is never reassigned. Use 'const' instead  prefer-const
+
+/home/user/Project-Next-ECommerce/src/app/cart/page.tsx
+  34:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/user/Project-Next-ECommerce/src/app/cart/page.tsx:34:9
+  32 |             return;
+  33 |         }
+> 34 |         setLoading(true);
+     |         ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  35 |         const { token: cancelToken, cancel } = axios.CancelToken.source();
+  36 |         const id = setTimeout(() => {
+  37 |             axios  react-hooks/set-state-in-effect
+  62:25  warning  Expected an assignment or function call and instead saw an expression                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-expressions
+
+/home/user/Project-Next-ECommerce/src/app/order/[id]/page.tsx
+   76:13  warning  Expected an assignment or function call and instead saw an expression                                                                                                                                                                                                                    @typescript-eslint/no-unused-expressions
+   98:21  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                               @typescript-eslint/no-non-null-asserted-optional-chain
+  102:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  116:21  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                               @typescript-eslint/no-non-null-asserted-optional-chain
+  120:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  134:21  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                               @typescript-eslint/no-non-null-asserted-optional-chain
+  138:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  184:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/user/Project-Next-ECommerce/src/app/orders/page.tsx
+   7:10  warning  'useRouter' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  51:13  warning  Expected an assignment or function call and instead saw an expression                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-expressions
+  56:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/user/Project-Next-ECommerce/src/app/orders/page.tsx:56:13
+  54 |         }
+  55 |         if (finalData) {
+> 56 |             setOrders(
+     |             ^^^^^^^^^ Avoid calling setState() directly within an effect
+  57 |                 finalData.orders.map((order) => ({
+  58 |                     _id: order._id,
+  59 |                     quantity: order.orderItems.length,  react-hooks/set-state-in-effect
+
+/home/user/Project-Next-ECommerce/src/app/policies/page.tsx
+  204:113  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/home/user/Project-Next-ECommerce/src/app/product/[id]/page.tsx
+   7:10  warning  'useSelector' is defined but never used                                @typescript-eslint/no-unused-vars
+  14:10  warning  'RootState' is defined but never used                                  @typescript-eslint/no-unused-vars
+  16:10  warning  'CartItem' is defined but never used                                   @typescript-eslint/no-unused-vars
+  33:11  warning  'router' is assigned a value but never used                            @typescript-eslint/no-unused-vars
+  45:13  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
+
+/home/user/Project-Next-ECommerce/src/app/shipping/page.tsx
+    3:8   warning  'axios' is defined but never used                                                                           @typescript-eslint/no-unused-vars
+   66:25  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong  @typescript-eslint/no-non-null-asserted-optional-chain
+   87:35  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong  @typescript-eslint/no-non-null-asserted-optional-chain
+   96:35  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong  @typescript-eslint/no-non-null-asserted-optional-chain
+  109:37  error    Unexpected any. Specify a different type                                                                    @typescript-eslint/no-explicit-any
+  114:52  error    Unexpected any. Specify a different type                                                                    @typescript-eslint/no-explicit-any
+  135:42  error    Unexpected any. Specify a different type                                                                    @typescript-eslint/no-explicit-any
+  137:18  warning  'error' is defined but never used                                                                           @typescript-eslint/no-unused-vars
+
+/home/user/Project-Next-ECommerce/src/components/CartItem.tsx
+  56:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/user/Project-Next-ECommerce/src/components/Review/ReviewCard.tsx
+    4:31  warning  'use' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+    9:21  warning  'useParams' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   39:13  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                               @typescript-eslint/no-non-null-asserted-optional-chain
+   68:21  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                                                                                                                                               @typescript-eslint/no-non-null-asserted-optional-chain
+   76:13  warning  Expected an assignment or function call and instead saw an expression                                                                                                                                                                                                                    @typescript-eslint/no-unused-expressions
+   97:13  warning  Expected an assignment or function call and instead saw an expression                                                                                                                                                                                                                    @typescript-eslint/no-unused-expressions
+  119:8   warning  React Hook useEffect has missing dependencies: 'setRating' and 'user?._id'. Either include them or remove the dependency array                                                                                                                                                           react-hooks/exhaustive-deps
+  124:13  warning  Expected an assignment or function call and instead saw an expression                                                                                                                                                                                                                    @typescript-eslint/no-unused-expressions
+  179:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  218:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/user/Project-Next-ECommerce/src/components/admin/AdminSidebar/AdminSidebar.tsx
+  31:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/user/Project-Next-ECommerce/src/components/admin/AdminSidebar/AdminSidebar.tsx:31:9
+  29 |     useEffect(() => {
+  30 |         // Init phoneActive on mount
+> 31 |         setPhoneActive(window.innerWidth < 1100);
+     |         ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  32 |
+  33 |         window.addEventListener("resize", resizeHandler);
+  34 |  react-hooks/set-state-in-effect
+
+/home/user/Project-Next-ECommerce/src/components/admin/AdminSidebar/Li.tsx
+  7:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/user/Project-Next-ECommerce/src/components/admin/AdminSidebar/Sidebar/AppSidebar.tsx
+  10:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/user/Project-Next-ECommerce/src/components/admin/AdminSidebar/Sidebar/ChartSidebar.tsx
+  10:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/user/Project-Next-ECommerce/src/components/admin/AdminSidebar/Sidebar/DashboardSidebar.tsx
+  10:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/user/Project-Next-ECommerce/src/components/admin/Tables/DashboardTable.tsx
+  30:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/user/Project-Next-ECommerce/src/components/admin/Tables/TableHOC.tsx
+   11:5   warning  'TableOptions' is defined but never used            @typescript-eslint/no-unused-vars
+   18:6   warning  'TableInstanceWithHooks' is defined but never used  @typescript-eslint/no-unused-vars
+   46:18  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+   64:56  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+   71:53  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+   76:63  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+   99:37  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+  104:55  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+
+/home/user/Project-Next-ECommerce/src/redux/api/userAPI.ts
+  11:10  warning  'User' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/user/Project-Next-ECommerce/src/types/api-types.ts
+  166:12  error  Prefer using the primitive `string` as a type name, rather than the upper-cased `String`  @typescript-eslint/no-wrapper-object-types
+  167:11  error  Prefer using the primitive `string` as a type name, rather than the upper-cased `String`  @typescript-eslint/no-wrapper-object-types
+
+/home/user/Project-Next-ECommerce/src/utils/backend-features.ts
+  145:57  warning  'result' is defined but never used                    @typescript-eslint/no-unused-vars
+  213:13  error    'monthDiff' is never reassigned. Use 'const' instead  prefer-const
+
+/home/user/Project-Next-ECommerce/src/utils/features.ts
+  27:9  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
+
+✖ 115 problems (63 errors, 52 warnings)
+  4 errors and 0 warnings potentially fixable with the `--fix` option.
+
+
+EXIT_CODE=1

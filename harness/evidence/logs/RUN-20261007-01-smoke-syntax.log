@@ -1,0 +1,2 @@
+Command: node --check harness/automation/api/public-smoke.mjs
+EXIT_CODE=0

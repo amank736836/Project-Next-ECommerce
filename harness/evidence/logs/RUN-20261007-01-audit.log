@@ -1,0 +1,32 @@
+Command: npm audit --json
+Audit exit code: 1
+Counts: {"info":0,"low":1,"moderate":6,"high":19,"critical":3,"total":29}
+LOW @babel/core: direct=false; range=<=7.29.0; fix=true
+HIGH @grpc/grpc-js: direct=false; range=<=1.13.5; fix=true
+MODERATE @humanfs/node: direct=false; range=<0.16.8; fix=true
+HIGH @next/eslint-plugin-next: direct=false; range=>=14.3.0-canary.0; fix={"name":"eslint-config-next","version":"14.2.35","isSemVerMajor":true}
+MODERATE @protobufjs/utf8: direct=false; range=<=1.1.0; fix=true
+MODERATE ajv: direct=false; range=<6.14.0; fix=true
+HIGH axios: direct=true; range=1.0.0 - 1.19.0; fix=true
+MODERATE baseline-browser-mapping: direct=false; range=>=2.0.0 <2.11.0; fix=true
+HIGH brace-expansion: direct=false; range=<=1.1.20 || 2.0.0 - 2.1.6; fix=true
+HIGH braces: direct=false; range=*; fix={"name":"eslint-config-next","version":"14.2.35","isSemVerMajor":true}
+HIGH browserslist: direct=false; range=<=4.28.6; fix=true
+HIGH eslint-config-next: direct=true; range=>=14.3.0-canary.0; fix={"name":"eslint-config-next","version":"14.2.35","isSemVerMajor":true}
+HIGH fast-glob: direct=false; range=*; fix={"name":"eslint-config-next","version":"14.2.35","isSemVerMajor":true}
+HIGH flatted: direct=false; range=<=3.4.1; fix=true
+MODERATE follow-redirects: direct=false; range=<=1.15.11; fix=true
+HIGH form-data: direct=false; range=4.0.0 - 4.0.5; fix=true
+HIGH immutable: direct=false; range=5.0.0-beta.1 - 5.1.7; fix=true
+HIGH js-yaml: direct=false; range=4.0.0 - 4.3.1; fix=true
+HIGH lodash: direct=false; range=<=4.17.23; fix=true
+HIGH micromatch: direct=false; range=>=0.2.0; fix={"name":"eslint-config-next","version":"14.2.35","isSemVerMajor":true}
+MODERATE mongoose: direct=true; range=9.0.0 - 9.7.1; fix=true
+HIGH nanoid: direct=false; range=<=3.3.17; fix=true
+CRITICAL next: direct=true; range=9.3.4-canary.0 - 16.3.2; fix={"name":"next","version":"16.4.0","isSemVerMajor":false}
+HIGH picomatch: direct=false; range=<=2.3.1 || 4.0.0 - 4.0.3; fix=true
+HIGH postcss: direct=false; range=<=8.5.22; fix={"name":"next","version":"16.4.0","isSemVerMajor":false}
+CRITICAL protobufjs: direct=false; range=<=7.6.4; fix=true
+HIGH sharp: direct=false; range=<=0.35.5-rc.1; fix={"name":"next","version":"16.4.0","isSemVerMajor":false}
+HIGH source-map-js: direct=false; range=1.0.0 - 1.2.1; fix=true
+CRITICAL websocket-driver: direct=false; range=<=0.7.4; fix=true

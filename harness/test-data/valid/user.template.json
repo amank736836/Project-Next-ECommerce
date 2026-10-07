@@ -1,0 +1,9 @@
+{
+  "_id": "HARNESS_TEST_USER_001",
+  "name": "Harness Buyer",
+  "email": "buyer-001@example.invalid",
+  "photo": "https://example.invalid/harness-user.png",
+  "role": "user",
+  "gender": "male",
+  "dob": "1990-01-01T00:00:00.000Z"
+}

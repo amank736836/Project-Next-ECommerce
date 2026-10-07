@@ -1,0 +1,3 @@
+Refusing non-local target. Set HARNESS_ALLOW_REMOTE=1 only for an authorized QA environment.
+Command: HARNESS_BASE_URL=https://example.com node harness/automation/api/public-smoke.mjs
+EXIT_CODE=2
