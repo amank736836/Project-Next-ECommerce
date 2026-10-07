@@ -1,0 +1,154 @@
+
+> next-app@0.1.0 build
+> next build
+
+▲ Next.js 16.1.7 (Turbopack)
+
+  Creating an optimized production build ...
+Turbopack build encountered 6 warnings:
+./src/styles/app.scss
+Issue while running loader
+SassWarning: 8 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+
+
+./src/styles/app.scss
+Issue while running loader
+SassWarning: Deprecation Warning on line 87, column 8 of file:///home/user/Project-Next-ECommerce/src/styles/app.scss:87:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+87 | @import "mixin";
+
+
+src/styles/app.scss 88:9  root stylesheet
+
+
+
+./src/styles/app.scss
+Issue while running loader
+SassWarning: Deprecation Warning on line 88, column 8 of file:///home/user/Project-Next-ECommerce/src/styles/app.scss:88:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+88 | @import "login";
+
+
+src/styles/app.scss 89:9  root stylesheet
+
+
+
+./src/styles/app.scss
+Issue while running loader
+SassWarning: Deprecation Warning on line 89, column 8 of file:///home/user/Project-Next-ECommerce/src/styles/app.scss:89:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+89 | @import "admin-styles/admin.scss";
+
+
+src/styles/app.scss 90:9  root stylesheet
+
+
+
+./src/styles/app.scss
+Issue while running loader
+SassWarning: Deprecation Warning on line 90, column 8 of file:///home/user/Project-Next-ECommerce/src/styles/app.scss:90:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+90 | @import "home";
+
+
+src/styles/app.scss 91:9  root stylesheet
+
+
+
+./src/styles/app.scss
+Issue while running loader
+SassWarning: Deprecation Warning on line 91, column 8 of file:///home/user/Project-Next-ECommerce/src/styles/app.scss:91:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+91 | @import "search";
+
+
+src/styles/app.scss 92:9  root stylesheet
+
+
+
+✓ Compiled successfully in 20.9s
+  Running TypeScript ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/44) ...
+  Generating static pages using 1 worker (11/44) 
+  Generating static pages using 1 worker (22/44) 
+  Generating static pages using 1 worker (33/44) 
+✓ Generating static pages using 1 worker (44/44) in 684.7ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ○ /admin/chart/bar
+├ ○ /admin/chart/line
+├ ○ /admin/chart/pie
+├ ƒ /admin/coupon/[id]
+├ ○ /admin/coupon/new
+├ ○ /admin/coupons
+├ ○ /admin/customers
+├ ○ /admin/dashboard
+├ ƒ /admin/product/[id]
+├ ○ /admin/product/new
+├ ○ /admin/products
+├ ○ /admin/stopwatch
+├ ○ /admin/toss
+├ ○ /admin/transaction
+├ ƒ /admin/transaction/[id]
+├ ƒ /api/admin-fix-v3
+├ ƒ /api/dashboard/bar
+├ ƒ /api/dashboard/line
+├ ƒ /api/dashboard/pie
+├ ƒ /api/dashboard/stats
+├ ƒ /api/order/[id]
+├ ƒ /api/order/all
+├ ƒ /api/order/my
+├ ƒ /api/order/new
+├ ƒ /api/payment/coupon/[id]
+├ ƒ /api/payment/coupon/all
+├ ƒ /api/payment/coupon/new
+├ ƒ /api/payment/create
+├ ƒ /api/payment/discount
+├ ƒ /api/payment/verify
+├ ƒ /api/product/[id]
+├ ƒ /api/product/admin-products
+├ ƒ /api/product/all
+├ ƒ /api/product/categories
+├ ƒ /api/product/latest
+├ ƒ /api/product/new
+├ ƒ /api/product/review/[id]
+├ ƒ /api/product/review/new
+├ ƒ /api/user/[id]
+├ ƒ /api/user/all
+├ ƒ /api/user/new
+├ ○ /cart
+├ ○ /login
+├ ƒ /order/[id]
+├ ○ /orders
+├ ○ /policies
+├ ƒ /product/[id]
+├ ○ /search
+└ ○ /shipping
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+EXIT_CODE=0

@@ -1,0 +1,19 @@
+{
+  "validRatings": [
+    1,
+    5
+  ],
+  "invalidRatings": [
+    0,
+    6,
+    -1
+  ],
+  "expectedAverageExample": {
+    "ratings": [
+      1,
+      5
+    ],
+    "count": 2,
+    "floorAverage": 3
+  }
+}

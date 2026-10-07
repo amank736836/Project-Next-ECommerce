@@ -1,0 +1,11 @@
+{
+  "productId": "000000000000000000000001",
+  "stock": 3,
+  "quantities": [
+    0,
+    1,
+    3,
+    4
+  ],
+  "notes": "Synthetic values only; compare client controls with server reduceStock validation."
+}

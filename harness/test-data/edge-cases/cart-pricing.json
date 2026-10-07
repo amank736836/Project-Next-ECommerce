@@ -1,0 +1,16 @@
+{
+  "subtotals": [
+    0,
+    1,
+    1000,
+    1001
+  ],
+  "discounts": [
+    0,
+    1,
+    1000,
+    1001
+  ],
+  "reducerObservedFormula": "tax=round(subtotal*0.18); shipping=0 when subtotal=0 or subtotal>1000, else 200; discount=min(input,subtotal)",
+  "policyConflict": "Policies page says free above 999 and 50 below 999; intended rule UNKNOWN / REQUIRES VALIDATION"
+}

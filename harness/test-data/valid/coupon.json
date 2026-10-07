@@ -1,0 +1,10 @@
+{
+  "code": "HARNESS-VALID-001",
+  "amount": 125,
+  "size": 16,
+  "prefix": "TEST-",
+  "postfix": "-END",
+  "includeNumbers": true,
+  "includeCharacters": true,
+  "includeSymbols": false
+}

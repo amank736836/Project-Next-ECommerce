@@ -1,0 +1,16 @@
+{
+  "name": "Synthetic Everyday Tote",
+  "photos": [
+    {
+      "public_id": "harness/test-product-001",
+      "url": "https://example.invalid/harness-product.jpg"
+    }
+  ],
+  "price": 1250,
+  "stock": 3,
+  "category": "test-fixtures",
+  "description": "Synthetic harness fixture; not a real listing.",
+  "ratings": 0,
+  "averageRating": 0,
+  "numOfReviews": 0
+}
