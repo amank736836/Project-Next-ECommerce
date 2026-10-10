@@ -29,8 +29,11 @@ export const orderAPI = createApi({
             }),
             providesTags: ["orders"],
         }),
-        orderDetails: builder.query<OrderDetailsResponse, string>({
-            query: (id) => id,
+        orderDetails: builder.query<OrderDetailsResponse, { orderId: string; id: string }>({
+            query: ({ orderId, id }) => ({
+                url: `${orderId}`,
+                params: { id },
+            }),
             providesTags: ["orders"],
         }),
         newOrder: builder.mutation<NewOrderResponse, NewOrderRequest>({

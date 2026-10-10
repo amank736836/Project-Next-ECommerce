@@ -55,7 +55,8 @@ export const userAPI = createApi({
 export const getUser = async (id: string) => {
     try {
         const { data }: { data: UserResponse } = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL || ""}/api/user/${id}`
+            `${process.env.NEXT_PUBLIC_SERVER_URL || ""}/api/user/${id}`,
+            { params: { id } },
         );
 
         return data;
