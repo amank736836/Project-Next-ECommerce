@@ -45,7 +45,10 @@ const OrderManagement = () => {
     const params = useParams();
     const id = params?.id as string;
 
-    const { data, isLoading, isError, error } = useOrderDetailsQuery(id);
+    const { data, isLoading, isError, error } = useOrderDetailsQuery(
+        { orderId: id, id: user?._id || "" },
+        { skip: !id || !user?._id },
+    );
 
     const [order, setOrder] = useState<Order>(defaultOrder);
 

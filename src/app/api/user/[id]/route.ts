@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/db";
 import { redis } from "@/lib/redis";
 import { User } from "@/models/user";
+import { requireSelfOrAdmin, safeErrorMessage } from "@/utils/auth";
 import { invalidateCache } from "@/utils/backend-features";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -21,6 +22,9 @@ export const GET = async (
                 { status: 400 }
             );
         }
+
+        const auth = await requireSelfOrAdmin(req, id);
+        if (auth.error) return auth.error;
 
         let user;
         const key = `user-${id}`;

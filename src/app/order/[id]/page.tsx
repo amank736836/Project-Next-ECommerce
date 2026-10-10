@@ -58,7 +58,10 @@ const OrderDetails = ({ params }: { params: Promise<{ id: string }> }) => {
     // In Next.js 15+, params is a Promise. We can use React.use() to unwrap it.
     const { id } = use(params);
 
-    const { data, isLoading, isError, error } = useOrderDetailsQuery(id);
+    const { data, isLoading, isError, error } = useOrderDetailsQuery(
+        { orderId: id, id: user?._id || "" },
+        { skip: !id || !user?._id },
+    );
 
     const [loading, setLoading] = useState<boolean>(false);
 

@@ -4,6 +4,7 @@ import { Order } from "@/models/order";
 import { Payment } from "@/models/payment";
 import { Product } from "@/models/product";
 import { User } from "@/models/user";
+import { requireSelfOrAdmin } from "@/utils/auth";
 import { invalidateCache, OrderItemType } from "@/utils/backend-features";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -34,6 +35,10 @@ export const GET = async (
             }
             await redis.set(key, JSON.stringify(order));
         }
+
+        const ownerId = order.user?._id?.toString?.() || order.user?.toString?.() || order.user;
+        const auth = await requireSelfOrAdmin(req, String(ownerId));
+        if (auth.error) return auth.error;
 
         return NextResponse.json(
             {
