@@ -74,6 +74,10 @@ export const cartReducer = createSlice({
         updateCoupon: (state, action: PayloadAction<string>) => {
             state.coupon = action.payload;
         },
+        // Restores persisted line items on the client (see ReduxProvider).
+        hydrateCartItems: (state, action: PayloadAction<CartItem[]>) => {
+            state.cartItems = action.payload;
+        },
     },
 });
 
@@ -83,4 +87,5 @@ export const {
     calculatePrice,
     resetCart,
     updateCoupon,
+    hydrateCartItems,
 } = cartReducer.actions;

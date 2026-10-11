@@ -1,6 +1,6 @@
 .productSearchPage {
     --search-ink: #282721;
-    --search-muted: #77736c;
+    --search-muted: #6b675f;
     --search-accent: #ec7046;
     --search-border: rgba(40, 39, 33, 0.12);
 
@@ -95,7 +95,7 @@
         .range-limits {
             display: flex;
             justify-content: space-between;
-            color: #969087;
+            color: #6b675f;
             font-size: 0.68rem;
             font-variant-numeric: tabular-nums;
         }
@@ -156,7 +156,7 @@
         }
 
         .search-eyebrow {
-            color: #89847b;
+            color: #6b675f;
             font-size: 0.67rem;
             font-weight: 700;
             letter-spacing: 0.15em;
@@ -166,7 +166,7 @@
         .search-result-count {
             flex: 0 0 auto;
             padding-bottom: 0.32rem;
-            color: #89847b;
+            color: #6b675f;
             font-size: 0.78rem;
         }
 
@@ -212,13 +212,13 @@
                 font-size: 0.85rem;
 
                 &::placeholder {
-                    color: #a19b91;
+                    color: #6b675f;
                 }
             }
         }
 
         .toolbar-note {
-            color: #aaa49a;
+            color: #6b675f;
             font-size: 0.74rem;
         }
 
@@ -360,7 +360,7 @@
         .back-home-link {
             display: inline-block;
             margin-top: 2rem;
-            color: #918b82;
+            color: #6b675f;
             font-size: 0.75rem;
             transition: color 0.2s ease;
 

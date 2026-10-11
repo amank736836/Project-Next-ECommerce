@@ -127,19 +127,19 @@ const Policies = () => {
                     <section>
                         <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Virtuo Store</h1>
                         <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Refund Policy</h2>
-                        <p style={{ marginBottom: "1rem" }}>At **Virtuo Store**, we strive to provide the best shopping experience for our customers. If you wish to request a refund, please review our policy below.</p>
+                        <p style={{ marginBottom: "1rem" }}>At Virtuo Store, we strive to provide the best shopping experience for our customers. If you wish to request a refund, please review our policy below.</p>
 
                         <h3 style={{ fontSize: "1.2rem", marginTop: "1.5rem", marginBottom: "0.5rem" }}>Cancellation & Refund Eligibility:</h3>
                         <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
-                            <li>Orders can be canceled within **12 hours** of purchase for a full refund.</li>
+                            <li>Orders can be canceled within <strong>12 hours</strong> of purchase for a full refund.</li>
                             <li>Once an order has been shipped, it is not eligible for cancellation.</li>
                             <li>Refunds are only applicable for defective, damaged, or incorrect products received.</li>
                         </ul>
 
                         <h3 style={{ fontSize: "1.2rem", marginTop: "1.5rem", marginBottom: "0.5rem" }}>Process for Refund:</h3>
                         <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
-                            <li>To request a refund, email us at **support@virtuostore.in** with your order details and reason for the refund.</li>
-                            <li>Refunds will be processed within **7-10 business days** via the original payment method.</li>
+                            <li>To request a refund, email us at <strong>support@virtuostore.in</strong> with your order details and reason for the refund.</li>
+                            <li>Refunds will be processed within <strong>7-10 business days</strong> via the original payment method.</li>
                             <li>In case of a damaged or incorrect product, customers may be required to share images or return the item.</li>
                         </ul>
 
@@ -153,7 +153,7 @@ const Policies = () => {
                         <h3 style={{ fontSize: "1.2rem", marginTop: "1.5rem", marginBottom: "0.5rem" }}>Exchange Policy:</h3>
                         <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
                             <li>If you receive a defective or incorrect item, we offer free replacements.</li>
-                            <li>Exchanges must be requested within **7 days** of receiving the order.</li>
+                            <li>Exchanges must be requested within <strong>7 days</strong> of receiving the order.</li>
                         </ul>
 
                         <h3 style={{ fontSize: "1.2rem", marginTop: "1.5rem", marginBottom: "0.5rem" }}>Contact Us:</h3>
@@ -167,7 +167,7 @@ const Policies = () => {
                     <section>
                         <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Virtuo Store</h1>
                         <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Privacy Policy</h2>
-                        <p style={{ marginBottom: "1rem" }}>At **Virtuo Store**, we value your privacy and are committed to protecting your personal data. This policy outlines how we collect, use, and protect your information.</p>
+                        <p style={{ marginBottom: "1rem" }}>At Virtuo Store, we value your privacy and are committed to protecting your personal data. This policy outlines how we collect, use, and protect your information.</p>
 
                         <h3 style={{ fontSize: "1.2rem", marginTop: "1.5rem", marginBottom: "0.5rem" }}>Information We Collect:</h3>
                         <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
@@ -224,13 +224,13 @@ const Policies = () => {
                     <section>
                         <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Virtuo Store</h1>
                         <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Shipping Policy</h2>
-                        <p style={{ marginBottom: "1rem" }}>Thank you for shopping with **Virtuo Store**. We are committed to delivering your orders in a timely and secure manner. Please review our shipping policy below.</p>
+                        <p style={{ marginBottom: "1rem" }}>Thank you for shopping with Virtuo Store. We are committed to delivering your orders in a timely and secure manner. Please review our shipping policy below.</p>
 
                         <h3 style={{ fontSize: "1.2rem", marginTop: "1.5rem", marginBottom: "0.5rem" }}>Delivery Timeline:</h3>
                         <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
-                            <li>Orders are processed within **24-48 hours** of confirmation.</li>
-                            <li>Standard delivery across India takes **5-10 business days** from the date of dispatch.</li>
-                            <li>Express shipping (if available) takes **2-5 business days**.</li>
+                            <li>Orders are processed within <strong>24-48 hours</strong> of confirmation.</li>
+                            <li>Standard delivery across India takes <strong>5-10 business days</strong> from the date of dispatch.</li>
+                            <li>Express shipping (if available) takes <strong>2-5 business days</strong>.</li>
                             <li>Unforeseen delays due to weather, holidays, or courier issues will be communicated to you.</li>
                         </ul>
 
@@ -255,13 +255,13 @@ const Policies = () => {
 
                         <h3 style={{ fontSize: "1.2rem", marginTop: "1.5rem", marginBottom: "0.5rem" }}>Order Modifications & Cancellations:</h3>
                         <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
-                            <li>Orders can be modified or canceled within **12 hours** of placement.</li>
+                            <li>Orders can be modified or canceled within <strong>12 hours</strong> of placement.</li>
                             <li>Once an order is shipped, cancellations are not allowed.</li>
                         </ul>
 
                         <h3 style={{ fontSize: "1.2rem", marginTop: "1.5rem", marginBottom: "0.5rem" }}>Lost or Damaged Shipments:</h3>
                         <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
-                            <li>If your order is lost or damaged during transit, please contact us at **support@virtuostore.in** within 48 hours of delivery.</li>
+                            <li>If your order is lost or damaged during transit, please contact us at <strong>support@virtuostore.in</strong> within 48 hours of delivery.</li>
                             <li>We will initiate an investigation and provide a resolution.</li>
                         </ul>
 

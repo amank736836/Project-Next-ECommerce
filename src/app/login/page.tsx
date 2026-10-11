@@ -69,8 +69,9 @@ const Login = () => {
             <main>
                 <h1 className="heading">Login</h1>
                 <div>
-                    <label>Gender</label>
+                    <label htmlFor="gender">Gender</label>
                     <select
+                        id="gender"
                         suppressHydrationWarning
                         title="gender"
                         value={gender}

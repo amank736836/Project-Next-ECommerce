@@ -64,19 +64,30 @@ const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
             </article>
             <div>
                 <button
+                    type="button"
+                    aria-label="Decrease quantity"
                     disabled={decrementDisabled}
                     onClick={() => decrementHandler()}
-                    onDoubleClick={() => removeHandler()}
                 >
                     -
                 </button>
                 <p>{quantity}</p>
-                <button disabled={incrementDisabled} onClick={() => incrementHandler()}>
+                <button
+                    type="button"
+                    aria-label="Increase quantity"
+                    disabled={incrementDisabled}
+                    onClick={() => incrementHandler()}
+                >
                     +
                 </button>
             </div>
-            <button onClick={() => removeHandler()}>
-                <FaTrash />
+            <button
+                type="button"
+                aria-label={`Remove ${name} from cart`}
+                title="Remove from cart"
+                onClick={() => removeHandler()}
+            >
+                <FaTrash aria-hidden="true" />
             </button>
         </div>
     );

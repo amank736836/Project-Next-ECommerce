@@ -287,3 +287,64 @@
     display: grid;
     place-items: center;
 }
+
+// Phone and small-tablet layout: the gallery and details were laid out side by
+// side at fixed widths (12rem action buttons, 40/60 split), which overflowed the
+// viewport. Stack them and let the action row wrap.
+@media (max-width: 860px) {
+    .productDetails {
+        padding: 1rem 1.25rem 2rem;
+        padding-top: 6rem;
+
+        >main {
+            flex-direction: column;
+            gap: 1.5rem;
+
+            >section {
+                &:first-child,
+                &:last-child {
+                    width: 100%;
+                }
+
+                &:last-child {
+                    min-height: 0;
+
+                    h1 {
+                        font-size: 1.6rem;
+                        margin: 0.5rem 0;
+                        overflow-wrap: anywhere;
+                    }
+
+                    >div {
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
+                        gap: 0.5rem 1rem;
+                    }
+
+                    p {
+                        height: auto;
+                        max-height: 16rem;
+                        overflow-wrap: anywhere;
+                    }
+
+                    article {
+                        flex-wrap: wrap;
+                        gap: 1rem;
+
+                        >div:last-child {
+                            flex-wrap: wrap;
+                            gap: 0.75rem;
+                            width: 100%;
+
+                            >button {
+                                flex: 1 1 10rem;
+                                width: auto;
+                                min-width: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

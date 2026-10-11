@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/redux/reducer/cartReducer";
+import { RootState } from "@/redux/store";
 import { Product } from "@/types/types";
 
 export const ReviewCustomizedButtons = ({ product }: { product: Product }) => {
@@ -40,7 +41,23 @@ export const ReviewCustomizedButtons = ({ product }: { product: Product }) => {
         }
     };
 
+    // addToCart replaces the stored quantity, so merge with what is already in
+    // the cart and never exceed the available stock.
+    const existingQuantity = useSelector(
+        (state: RootState) =>
+            state.cartReducer.cartItems.find((item) => item.productId === product._id)?.quantity ?? 0
+    );
+
     const AddToCart = () => {
+        if (product.stock < 1) {
+            toast.error("Out of Stock");
+            return;
+        }
+        const quantity = Math.min(existingQuantity + productQuantity, product.stock);
+        if (quantity === existingQuantity) {
+            toast.error("Maximum quantity reached");
+            return;
+        }
         toast.success("Added to Cart");
         dispatch(
             addToCart({
@@ -48,7 +65,7 @@ export const ReviewCustomizedButtons = ({ product }: { product: Product }) => {
                 name: product.name,
                 photos: product.photos,
                 price: product.price,
-                quantity: productQuantity,
+                quantity,
                 stock: product.stock,
             })
         );
@@ -57,11 +74,11 @@ export const ReviewCustomizedButtons = ({ product }: { product: Product }) => {
     return (
         <article>
             <div>
-                <button onClick={decrementHandler} disabled={decrementDisabled}>
+                <button type="button" aria-label="Decrease quantity" onClick={decrementHandler} disabled={decrementDisabled}>
                     -
                 </button>
                 <span>{productQuantity}</span>
-                <button disabled={incrementDisabled} onClick={incrementHandler}>
+                <button type="button" aria-label="Increase quantity" disabled={incrementDisabled} onClick={incrementHandler}>
                     +
                 </button>
             </div>

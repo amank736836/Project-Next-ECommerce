@@ -4,7 +4,7 @@ import { FaTshirt, FaShippingFast, FaUndo, FaLeaf, FaUserFriends, FaGlobe, FaRob
 
 const About = () => {
     return (
-        <div className="about-page" style={{ padding: "10rem 2rem 2rem", maxWidth: "1200px", margin: "0 auto", lineHeight: "1.6", color: "#333" }}>
+        <div className="about-page" style={{ padding: "6rem 2rem 2rem", maxWidth: "1200px", margin: "0 auto", lineHeight: "1.6", color: "#333" }}>
             <section style={{ marginBottom: "3rem", textAlign: "center" }}>
                 <h1 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
                     <FaTshirt /> About VirtuoStore
@@ -27,7 +27,7 @@ const About = () => {
                 <h2 style={{ fontSize: "1.8rem", fontWeight: "600", marginBottom: "1rem", color: "#000", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     <FaGem /> Our Mission & Vision
                 </h2>
-                <div style={{ paddingLeft: "1rem", borderLeft: "4px solid #f97316" }}>
+                <div style={{ paddingLeft: "1rem", borderLeft: "4px solid var(--accent-deep)" }}>
                     <h3 style={{ fontSize: "1.4rem", fontWeight: "500", marginBottom: "0.5rem" }}>Mission</h3>
                     <p style={{ marginBottom: "1rem" }}>
                         Our mission is to redefine the fashion shopping experience by offering high-quality, trendy, and affordable apparel and footwear. We aim to bring style, comfort, and affordability together under one roof, allowing our customers to express themselves effortlessly through fashion.
@@ -41,7 +41,7 @@ const About = () => {
 
             <section style={{ marginBottom: "2.5rem" }}>
                 <h2 style={{ fontSize: "1.8rem", fontWeight: "600", marginBottom: "1rem", color: "#000" }}>What Sets Us Apart?</h2>
-                <ul style={{ listStyleType: "none", padding: 0, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1rem" }}>
+                <ul style={{ listStyleType: "none", padding: 0, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: "1rem" }}>
                     {[
                         { title: "Curated Fashion Selection", desc: "T-Shirts, Pants, and Shoes.", icon: <FaTshirt /> },
                         { title: "Quality Assurance", desc: "Premium materials and craftsmanship.", icon: <FaGem /> },
@@ -53,7 +53,7 @@ const About = () => {
                         { title: "Eco-Friendly Fashion", desc: "Sustainable and ethical sourcing.", icon: <FaLeaf /> }
                     ].map((item, index) => (
                         <li key={index} style={{ backgroundColor: "#f9f9f9", padding: "1rem", borderRadius: "8px", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                            <span style={{ fontSize: "1.5rem", color: "#f97316" }}>{item.icon}</span>
+                            <span style={{ fontSize: "1.5rem", color: "var(--accent-deep)" }}>{item.icon}</span>
                             <div>
                                 <strong>{item.title}:</strong> {item.desc}
                             </div>
