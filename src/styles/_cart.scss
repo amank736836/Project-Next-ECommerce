@@ -66,7 +66,8 @@
     padding: 1rem;
     @include flex(row, flex-start, center, 3rem);
 
-    >img {
+    // The thumbnail is wrapped in a Link, so target it through the anchor.
+    >a >img {
         @include square(10rem);
         object-fit: scale-down;
     }
@@ -117,6 +118,40 @@
 
         &:hover {
             color: red;
+        }
+    }
+}
+
+// Phone and small-tablet layout: stack the summary below the items instead of
+// keeping the 70/30 split, which pushed the summary off-screen below ~860px.
+@media (max-width: 860px) {
+    .cart {
+        flex-direction: column;
+        gap: 2rem;
+        height: auto;
+        min-height: calc(100vh - 4rem);
+        padding: 6rem 1.25rem 3rem;
+
+        >main {
+            width: 100%;
+        }
+
+        >aside {
+            width: 100%;
+            padding: 0;
+        }
+    }
+
+    .cartItem {
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        >a >img {
+            @include square(6rem);
+        }
+
+        >div {
+            margin-left: 0;
         }
     }
 }

@@ -18,7 +18,7 @@ import { RootState } from "@/redux/store";
 import { RazorpayResponse } from "@/types/api-types";
 
 const Shipping = () => {
-    const { user } = useSelector((state: RootState) => state.userReducer);
+    const { user, loading: userLoading } = useSelector((state: RootState) => state.userReducer);
     const { cartItems, coupon } = useSelector(
         (state: RootState) => state.cartReducer
     );
@@ -33,9 +33,12 @@ const Shipping = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // Wait for Firebase auth to resolve; otherwise a signed-in user who
+        // loads this page directly is redirected to /login before user is known.
+        if (userLoading) return;
         if (cartItems.length <= 0) return router.push("/cart");
         if (!user) return router.push("/login");
-    }, [user, cartItems, router]); // Added redirection logic
+    }, [user, userLoading, cartItems, router]); // Added redirection logic
 
     const [shippingInfo, setShippingInfo] = useState({
         address: user?.shippingInfo?.address || "",
@@ -156,7 +159,9 @@ const Shipping = () => {
     };
 
     useEffect(() => {
-        loadScript("https://checkout.razorpay.com/v1/checkout.js");
+        loadScript("https://checkout.razorpay.com/v1/checkout.js").catch(() => {
+            toast.error("Payment gateway could not be loaded. Check your connection and try again.");
+        });
     }, []);
 
     if (loading) return <Loader />;

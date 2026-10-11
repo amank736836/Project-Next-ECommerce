@@ -1,7 +1,7 @@
 "use client";
 
 import { CarouselButtonType, MyntraCarousel, Slider } from "6pp";
-import { useEffect, useState, use } from "react";
+import { useEffect, useRef, useState, use } from "react";
 import toast from "react-hot-toast";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { useSelector } from "react-redux";
@@ -55,6 +55,29 @@ const ProductDetails = ({ params }: { params: Promise<{ id: string }> }) => {
 
     const [carouselOpen, setCarouselOpen] = useState<boolean>(false);
 
+    // The 6pp Slider renders images without alt text and unlabeled arrow/dot
+    // buttons, and exposes no props for either. Label them once the product loads.
+    const galleryRef = useRef<HTMLElement>(null);
+    useEffect(() => {
+        const gallery = galleryRef.current;
+        if (!gallery || !productData) return;
+        const productName = productData.product.name;
+        gallery.querySelectorAll<HTMLImageElement>("img:not([alt])").forEach((img) => {
+            img.alt = productName;
+        });
+        const unlabeled = Array.from(
+            gallery.querySelectorAll<HTMLButtonElement>("button:not([aria-label])"),
+        ).filter((button) => !button.textContent?.trim());
+        const navigation = unlabeled.filter((button) => button.getBoundingClientRect().width >= 20);
+        const dots = unlabeled.filter((button) => button.getBoundingClientRect().width < 20);
+        navigation.forEach((button, index) => {
+            button.setAttribute("aria-label", index === 0 ? "Previous image" : "Next image");
+        });
+        dots.forEach((button, index) => {
+            button.setAttribute("aria-label", `Show image ${index + 1}`);
+        });
+    }, [productData]);
+
     return (
         <div className="productDetails">
             {isProductLoading ? (
@@ -62,7 +85,7 @@ const ProductDetails = ({ params }: { params: Promise<{ id: string }> }) => {
             ) : (
                 <>
                     <main>
-                        <section>
+                        <section ref={galleryRef}>
                             <Slider
                                 objectFit="scale-down"
                                 onClick={() => setCarouselOpen(true)}

@@ -5,7 +5,7 @@
     --paper: #f8f6f1;
     --surface: #fffefa;
     --accent: #ec7046;
-    --accent-deep: #d65d36;
+    --accent-deep: #b84a24; /* 4.8:1 on paper (WCAG AA text) */
     --line: rgba(38, 37, 33, 0.12);
     --font-sans: Inter, "Avenir Next", Avenir, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-family: var(--font-sans);
@@ -62,15 +62,15 @@ button {
 
 ::selection {
     color: #fffefa;
-    background: #d65d36;
+    background: #b84a24;
 }
 
 $color1: white;
 $color2: rgb(46, 46, 46);
-$color3: #ec7046;
+$color3: #c2502a; /* solid button fill; white text 4.7:1 */
 
 .red {
-    color: #d44c3e;
+    color: #b8402f;
 }
 
 .purple {

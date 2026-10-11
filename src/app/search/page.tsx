@@ -7,10 +7,12 @@ import { FaArrowRight, FaBoxOpen, FaFilter, FaSearch } from "react-icons/fa";
 import ProductCard from "@/components/ProductCard";
 import { useCategoriesQuery, useSearchProductsQuery } from "@/redux/api/productAPI";
 
+const maxPriceFallback = 100000;
+
 const Search = () => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
-  const [currentPrice, setCurrentPrice] = useState(100000);
+  const [currentPrice, setCurrentPrice] = useState(maxPriceFallback);
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
@@ -26,7 +28,9 @@ const Search = () => {
     sort,
     category,
     page,
-    price: currentPrice,
+    // Only filter by price once the slider has been moved below its maximum;
+    // otherwise the default ₹1,00,000 cap silently hid pricier products.
+    price: currentPrice < maxPriceFallback ? currentPrice : undefined,
   });
   const { data: categoriesResponse } = useCategoriesQuery("");
 
@@ -34,7 +38,7 @@ const Search = () => {
   const categories =
     searchProductsResponse?.categories ?? categoriesResponse?.categories ?? [];
   const minPrice = searchProductsResponse?.minAmount ?? 0;
-  const maxPrice = searchProductsResponse?.maxAmount ?? 100000;
+  const maxPrice = searchProductsResponse?.maxAmount ?? maxPriceFallback;
   const totalPage = searchProductsResponse?.totalPage ?? 1;
   const isPrevPage = page > 1;
   const isNextPage = page < totalPage;

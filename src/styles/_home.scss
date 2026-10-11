@@ -1,6 +1,7 @@
 $home-ink: #282721;
-$home-muted: #77736c;
+$home-muted: #6b675f;
 $home-accent: #ec7046;
+$home-accent-text: #b84a24; // text-safe variant (WCAG AA)
 $home-cream: #f8f6f1;
 $home-border: rgba(40, 39, 33, 0.12);
 
@@ -89,7 +90,7 @@ $home-border: rgba(40, 39, 33, 0.12);
         }
 
         em {
-            color: $home-accent;
+            color: $home-accent-text;
             font-family: Georgia, "Times New Roman", serif;
             font-size: 1.04em;
             font-weight: 400;
@@ -97,7 +98,7 @@ $home-border: rgba(40, 39, 33, 0.12);
         }
 
         i {
-            color: $home-accent;
+            color: $home-accent-text;
             font-style: normal;
         }
     }
@@ -134,7 +135,7 @@ $home-border: rgba(40, 39, 33, 0.12);
     height: 25px;
     border: 1px solid rgba(236, 112, 70, 0.42);
     border-radius: 50%;
-    color: $home-accent;
+    color: $home-accent-text;
     font-size: 0.85rem;
 }
 
@@ -191,7 +192,7 @@ $home-border: rgba(40, 39, 33, 0.12);
 
         &:hover {
             border-color: $home-accent;
-            color: $home-accent;
+            color: $home-accent-text;
         }
     }
 }
@@ -206,7 +207,7 @@ $home-border: rgba(40, 39, 33, 0.12);
     transition: color 0.2s ease;
 
     &:hover {
-        color: $home-accent;
+        color: $home-accent-text;
 
         .discover-icon {
             transform: translateY(3px);
@@ -529,7 +530,7 @@ $home-border: rgba(40, 39, 33, 0.12);
 }
 
 .promise-index {
-    color: #aaa49a;
+    color: #6b675f;
     font-size: 0.58rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -729,7 +730,7 @@ $home-border: rgba(40, 39, 33, 0.12);
     gap: 0.6rem;
     width: 100%;
     height: 100%;
-    color: #99938a;
+    color: #6b675f;
 
     > svg {
         color: #c2b9ad;
@@ -809,7 +810,7 @@ $home-border: rgba(40, 39, 33, 0.12);
 
 .productCard-category {
     overflow: hidden;
-    color: #8b867e;
+    color: #6b675f;
     font-size: 0.61rem;
     font-weight: 700;
     letter-spacing: 0.13em;
@@ -822,7 +823,7 @@ $home-border: rgba(40, 39, 33, 0.12);
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    color: #62846a;
+    color: #4d6b53;
     font-size: 0.63rem;
     white-space: nowrap;
 
@@ -1163,7 +1164,7 @@ $home-border: rgba(40, 39, 33, 0.12);
     border-top: 1px solid $home-border;
 
     > p {
-        color: #928d84;
+        color: #6b675f;
         font-size: 0.78rem;
     }
 
@@ -1173,7 +1174,7 @@ $home-border: rgba(40, 39, 33, 0.12);
         gap: clamp(0.85rem, 2vw, 1.8rem);
 
         a {
-            color: #77736c;
+            color: #6b675f;
             font-size: 0.78rem;
             transition: color 0.2s ease;
 
@@ -1200,7 +1201,7 @@ $home-border: rgba(40, 39, 33, 0.12);
     }
 
     > span > span {
-        color: $home-accent;
+        color: $home-accent-text;
     }
 }
 
